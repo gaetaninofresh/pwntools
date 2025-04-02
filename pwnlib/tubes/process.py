@@ -706,7 +706,7 @@ class process(tube):
         return self.proc.communicate(stdin)
 
     def terminate(self):
-        self.send_signal(self, signal.SIGTERM)
+        self.send_signal(signal.SIGTERM)
 
     def send_signal(self, signal):
         if self.proc is None:
