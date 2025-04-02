@@ -705,6 +705,18 @@ class process(tube):
 
         return self.proc.communicate(stdin)
 
+    def terminate(self):
+        self.send_signal(self, signal.SIGTERM)
+
+    def send_signal(self, signal):
+        if self.proc is None:
+            return
+
+        # Check that we aren't already dead
+        self.poll()
+        self.proc.send_signal(signal)
+        return
+
     # Implementation of the methods required for tube
     def recv_raw(self, numb):
         # This is a slight hack. We try to notice if the process is
